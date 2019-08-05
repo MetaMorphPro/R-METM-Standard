@@ -3,6 +3,7 @@ pragma solidity ^0.4.25;
 import "../utils/Ownable.sol";
 import "./RegulatorFactoryInterface.sol";
 import "../ERC20/ERC20.sol";
+import "../ERC20/R_ERC20Detailed.sol";
 import "../rToken/MetamorphRegulatedToken.sol";
 import "../rToken/MetamorphRegulatorRegistry.sol";
 
@@ -26,6 +27,12 @@ contract MetamorphRegulatedTokenFactory is RegulatorFactoryInterface, Ownable {
         fundsHolder = FundsHolder(_fundsHolder);
     }
 
+    function setFundsHolderAddress(address _fundsHolder) external onlyOwner {
+        require(_fundsHolder!=address(0), "address cannot be 0x");
+        fundsHolder = FundsHolder(_fundsHolder);
+    }
+
+
     function setPrice(uint256 _price) external onlyOwner {
         require(_price > 0, "Price cannot be 0");
         price = _price;
@@ -42,6 +49,7 @@ contract MetamorphRegulatedTokenFactory is RegulatorFactoryInterface, Ownable {
         MetamorphRegulatorRegistry registryContract = MetamorphRegulatorRegistry(_regulatorRegistry);
         MetamorphRegulatedToken rToken = new MetamorphRegulatedToken(registryContract, _name, _symbol);
         TokenSettings memory settings = TokenSettings({
+            ts: now,
             price: price,
             name: _name,
             symbol: _symbol,
@@ -60,12 +68,16 @@ contract MetamorphRegulatedTokenFactory is RegulatorFactoryInterface, Ownable {
         return issuerTokens[_issuer];
     }
 
-    function getInfo(address _issuer, address _token) public view returns (uint256, string, string) {
+    function getInfo(address _issuer, address _token) public view returns (uint256, string, string, uint8, uint256, uint256) {
         TokenSettings memory settings = issuerTokensData[_issuer][_token];
+        R_ERC20Detailed rToken = R_ERC20Detailed(_token);
         return(
             settings.price,
             settings.name,
-            settings.symbol
+            settings.symbol,
+            rToken.decimals(),
+            rToken.totalSupply(),
+            settings.ts
         );
     }
 

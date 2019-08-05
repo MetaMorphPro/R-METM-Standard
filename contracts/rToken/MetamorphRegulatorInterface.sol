@@ -5,7 +5,7 @@ contract MetamorphRegulatorInterface {
 
   /**
    * @notice This method *MUST* be called by `MetamorphRegulatedToken`s during `transfer()`, `transferFrom()` and `mint()`.
-   *         The implementation *SHOULD* check whether or not a transfer or mint can be approved.
+   *         The implementation *SHOULD* check whether or not a transfer ro mint can be approved.
    *
    * @dev    This method *MAY* call back to the token contract specified by `_token` for
    *         more information needed to enforce trade approval.
@@ -20,4 +20,6 @@ contract MetamorphRegulatorInterface {
    *               to assign meaning.
    */
   function check(address _token, address _spender, address _from, address _to, uint256 _amount) public returns (uint8);
+
+  function checkMint(address _token, uint256 _amount) public view returns (bool);
 }

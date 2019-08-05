@@ -16,9 +16,12 @@ contract FundsHolder is Ownable {
         0x4dc782F14bd27e63f1e0339B582a96d53df6C55f,
         0xa68358C42626f4e31820C30B09B27c4649670DE6,
         0x18f7e6B5A9b39895B7f38D696C702Cd290d5D77C,
-        0x32a18b166ab8178fd021a4f36ce60a73a0536c57,
+        0x23C6599aAdF44Be7cbaD6D9051bb4C2255b2f713,
         0x1baCaE51d1AFf3B16E0392a31CbA07E1dF8eab95
     ];
+    address community = 0x7A9dbEAd85731D7ec80D28e63aE6bACCA99F948E;
+    address burnAddress = 0x000000000000000000000000000000000000dEaD;
+
 
     mapping (address => uint256) public balance;
     mapping(address => bool) isOwner; /** All involved on the project that will get revenue */
@@ -42,13 +45,17 @@ contract FundsHolder is Ownable {
 
     function withdraw() external onlyOwners {
         require(ERC20(token).balanceOf(this) > 0, "Contract does not have any balance");
-        uint256 amount = ERC20(token).balanceOf(this)/6;
-         ERC20(token).transfer(owners[0], amount);
-         ERC20(token).transfer(owners[1], amount);
-         ERC20(token).transfer(owners[2], amount);
-         ERC20(token).transfer(owners[3], amount);
-         ERC20(token).transfer(owners[4], amount);
-         ERC20(token).transfer(owners[5], amount);
+        uint256 half = ERC20(token).balanceOf(this)/2;
+        uint256 amount = half/6;
+        uint256 percent25 = half/2;
+        ERC20(token).transfer(owners[0], amount);
+        ERC20(token).transfer(owners[1], amount);
+        ERC20(token).transfer(owners[2], amount);
+        ERC20(token).transfer(owners[3], amount);
+        ERC20(token).transfer(owners[4], amount);
+        ERC20(token).transfer(owners[5], amount);
+        ERC20(token).transfer(burnAddress, percent25); //burn 25%
+        ERC20(token).transfer(community, percent25);
     }
 
     function isAddressOwner(address _address) public view returns (bool) {

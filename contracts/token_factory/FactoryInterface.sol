@@ -16,6 +16,7 @@ contract FactoryInterface {
     FundsHolder internal fundsHolder;
 
     struct TokenSettings {
+        uint256 ts;
         uint256 price;
         string name;
         string symbol;
@@ -32,12 +33,8 @@ contract FactoryInterface {
     */
     mapping(address => mapping(address => TokenSettings)) issuerTokensData;
 
-    /**
-    * @dev Throws if called by any account other than the owner.
-    * @param  _token The address of the Metamoprh token
-    * @param  _price The price of the Regulated token
-    * @param  _fundsHolder The address of contract holding the funds
-    */
+    //implemented by the owner
+    function setFundsHolderAddress(address _fundsHolder) external;
 
     /**
     * @dev Function to set price of the token function, onlyowner
@@ -50,13 +47,6 @@ contract FactoryInterface {
     * @param _issuer The address of the issuer.
     */
     function getAlltokens(address _issuer) public view returns (address[]);
-
-    /**
-    * @dev Function to get info of a tokens created by the issuer, returns TokenSettings structure
-    * @param _issuer The address of the issuer.
-    * @param _token The address of the token.
-    */
-    function getInfo(address _issuer, address _token) public view returns (uint256, string, string);
 
     /**
     * @dev num of tokens created on the platform

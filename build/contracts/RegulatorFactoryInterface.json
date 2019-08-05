@@ -1,0 +1,1051 @@
+{
+  "contractName": "RegulatorFactoryInterface",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getFundsHolderAddress",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getNumOfTokens",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "metmToken",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_price",
+          "type": "uint256"
+        }
+      ],
+      "name": "setPrice",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_issuer",
+          "type": "address"
+        }
+      ],
+      "name": "getAlltokens",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "price",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_fundsHolder",
+          "type": "address"
+        }
+      ],
+      "name": "setFundsHolderAddress",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "tickers",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getNumOfIssuers",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "_issuer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "_symbol",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "_name",
+          "type": "string"
+        }
+      ],
+      "name": "Issued",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_symbol",
+          "type": "string"
+        },
+        {
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "name": "_regulatorRegistry",
+          "type": "address"
+        }
+      ],
+      "name": "createToken",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_symbol",
+          "type": "string"
+        }
+      ],
+      "name": "getIssuer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.25;\r\n\r\nimport \"./FactoryInterface.sol\";\r\nimport \"../rToken/MetamorphRegulatorRegistry.sol\";\r\n\r\n/**\r\n * @title TokenReserve interface\r\n */\r\ncontract RegulatorFactoryInterface is FactoryInterface {\r\n\r\n    event Issued(address indexed _issuer, string _symbol, string _name);\r\n\r\n    /**\r\n    * @dev mapping to save tickers pointing to the owner's address\r\n    */\r\n    mapping(uint256 => address) public tickers;\r\n    /**\r\n    * @dev Function to release token\r\n    * @param _symbol Symbol of the new token.\r\n    * @param _name Name of the new token.\r\n    * @param _regulatorRegistry Address of the regulator that will do the checks.\r\n    */\r\n    function createToken(string _symbol, string _name, address _regulatorRegistry) external;\r\n\r\n    /**\r\n    * @dev Returns the address of the issuer\r\n    * @param _symbol Symbol of the token to check.\r\n    */\r\n    function getIssuer(string _symbol) public view returns (address);\r\n}",
+  "sourcePath": "E:\\Ethereum\\METM\\MetamorphTokenCreation\\src\\app\\ethereum\\contracts\\token_factory\\RegulatorFactoryInterface.sol",
+  "ast": {
+    "absolutePath": "/E/Ethereum/METM/MetamorphTokenCreation/src/app/ethereum/contracts/token_factory/RegulatorFactoryInterface.sol",
+    "exportedSymbols": {
+      "RegulatorFactoryInterface": [
+        2223
+      ]
+    },
+    "id": 2224,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2190,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".25"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:15"
+      },
+      {
+        "absolutePath": "/E/Ethereum/METM/MetamorphTokenCreation/src/app/ethereum/contracts/token_factory/FactoryInterface.sol",
+        "file": "./FactoryInterface.sol",
+        "id": 2191,
+        "nodeType": "ImportDirective",
+        "scope": 2224,
+        "sourceUnit": 1786,
+        "src": "28:32:15",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/E/Ethereum/METM/MetamorphTokenCreation/src/app/ethereum/contracts/rToken/MetamorphRegulatorRegistry.sol",
+        "file": "../rToken/MetamorphRegulatorRegistry.sol",
+        "id": 2192,
+        "nodeType": "ImportDirective",
+        "scope": 2224,
+        "sourceUnit": 1097,
+        "src": "62:50:15",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2193,
+              "name": "FactoryInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1785,
+              "src": "198:16:15",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FactoryInterface_$1785",
+                "typeString": "contract FactoryInterface"
+              }
+            },
+            "id": 2194,
+            "nodeType": "InheritanceSpecifier",
+            "src": "198:16:15"
+          }
+        ],
+        "contractDependencies": [
+          1785
+        ],
+        "contractKind": "contract",
+        "documentation": "@title TokenReserve interface\r",
+        "fullyImplemented": false,
+        "id": 2223,
+        "linearizedBaseContracts": [
+          2223,
+          1785
+        ],
+        "name": "RegulatorFactoryInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2202,
+            "name": "Issued",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2201,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2196,
+                  "indexed": true,
+                  "name": "_issuer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2202,
+                  "src": "237:23:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2195,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "237:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2198,
+                  "indexed": false,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2202,
+                  "src": "262:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2197,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "262:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2200,
+                  "indexed": false,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2202,
+                  "src": "278:12:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2199,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "278:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "236:55:15"
+            },
+            "src": "224:68:15"
+          },
+          {
+            "constant": false,
+            "id": 2206,
+            "name": "tickers",
+            "nodeType": "VariableDeclaration",
+            "scope": 2223,
+            "src": "385:42:15",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+              "typeString": "mapping(uint256 => address)"
+            },
+            "typeName": {
+              "id": 2205,
+              "keyType": {
+                "id": 2203,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "393:7:15",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "385:27:15",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                "typeString": "mapping(uint256 => address)"
+              },
+              "valueType": {
+                "id": 2204,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "404:7:15",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Function to release token\r\n@param _symbol Symbol of the new token.\r\n@param _name Name of the new token.\r\n@param _regulatorRegistry Address of the regulator that will do the checks.\r",
+            "id": 2215,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "createToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2213,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2208,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2215,
+                  "src": "683:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2207,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "683:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2210,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2215,
+                  "src": "699:12:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2209,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "699:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2212,
+                  "name": "_regulatorRegistry",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2215,
+                  "src": "713:26:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2211,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "713:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "682:58:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2214,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "749:0:15"
+            },
+            "scope": 2223,
+            "src": "662:88:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Returns the address of the issuer\r\n@param _symbol Symbol of the token to check.\r",
+            "id": 2222,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getIssuer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2218,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2217,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2222,
+                  "src": "892:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2216,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "892:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "891:16:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2221,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2220,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2222,
+                  "src": "929:7:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2219,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "929:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "928:9:15"
+            },
+            "scope": 2223,
+            "src": "873:65:15",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2224,
+        "src": "160:781:15"
+      }
+    ],
+    "src": "0:941:15"
+  },
+  "legacyAST": {
+    "absolutePath": "/E/Ethereum/METM/MetamorphTokenCreation/src/app/ethereum/contracts/token_factory/RegulatorFactoryInterface.sol",
+    "exportedSymbols": {
+      "RegulatorFactoryInterface": [
+        2223
+      ]
+    },
+    "id": 2224,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2190,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".25"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:15"
+      },
+      {
+        "absolutePath": "/E/Ethereum/METM/MetamorphTokenCreation/src/app/ethereum/contracts/token_factory/FactoryInterface.sol",
+        "file": "./FactoryInterface.sol",
+        "id": 2191,
+        "nodeType": "ImportDirective",
+        "scope": 2224,
+        "sourceUnit": 1786,
+        "src": "28:32:15",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/E/Ethereum/METM/MetamorphTokenCreation/src/app/ethereum/contracts/rToken/MetamorphRegulatorRegistry.sol",
+        "file": "../rToken/MetamorphRegulatorRegistry.sol",
+        "id": 2192,
+        "nodeType": "ImportDirective",
+        "scope": 2224,
+        "sourceUnit": 1097,
+        "src": "62:50:15",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2193,
+              "name": "FactoryInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1785,
+              "src": "198:16:15",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FactoryInterface_$1785",
+                "typeString": "contract FactoryInterface"
+              }
+            },
+            "id": 2194,
+            "nodeType": "InheritanceSpecifier",
+            "src": "198:16:15"
+          }
+        ],
+        "contractDependencies": [
+          1785
+        ],
+        "contractKind": "contract",
+        "documentation": "@title TokenReserve interface\r",
+        "fullyImplemented": false,
+        "id": 2223,
+        "linearizedBaseContracts": [
+          2223,
+          1785
+        ],
+        "name": "RegulatorFactoryInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 2202,
+            "name": "Issued",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 2201,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2196,
+                  "indexed": true,
+                  "name": "_issuer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2202,
+                  "src": "237:23:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2195,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "237:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2198,
+                  "indexed": false,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2202,
+                  "src": "262:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2197,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "262:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2200,
+                  "indexed": false,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2202,
+                  "src": "278:12:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2199,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "278:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "236:55:15"
+            },
+            "src": "224:68:15"
+          },
+          {
+            "constant": false,
+            "id": 2206,
+            "name": "tickers",
+            "nodeType": "VariableDeclaration",
+            "scope": 2223,
+            "src": "385:42:15",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+              "typeString": "mapping(uint256 => address)"
+            },
+            "typeName": {
+              "id": 2205,
+              "keyType": {
+                "id": 2203,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "393:7:15",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "385:27:15",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                "typeString": "mapping(uint256 => address)"
+              },
+              "valueType": {
+                "id": 2204,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "404:7:15",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Function to release token\r\n@param _symbol Symbol of the new token.\r\n@param _name Name of the new token.\r\n@param _regulatorRegistry Address of the regulator that will do the checks.\r",
+            "id": 2215,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "createToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2213,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2208,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2215,
+                  "src": "683:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2207,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "683:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2210,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2215,
+                  "src": "699:12:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2209,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "699:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2212,
+                  "name": "_regulatorRegistry",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2215,
+                  "src": "713:26:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2211,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "713:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "682:58:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2214,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "749:0:15"
+            },
+            "scope": 2223,
+            "src": "662:88:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Returns the address of the issuer\r\n@param _symbol Symbol of the token to check.\r",
+            "id": 2222,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getIssuer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2218,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2217,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2222,
+                  "src": "892:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 2216,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "892:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "891:16:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2221,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2220,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2222,
+                  "src": "929:7:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2219,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "929:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "928:9:15"
+            },
+            "scope": 2223,
+            "src": "873:65:15",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2224,
+        "src": "160:781:15"
+      }
+    ],
+    "src": "0:941:15"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.25+commit.59dbf8f1.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.2",
+  "updatedAt": "2019-07-17T04:05:16.029Z"
+}

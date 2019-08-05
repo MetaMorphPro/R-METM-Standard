@@ -31,6 +31,11 @@ contract MetamorphTokenRegulator is MetamorphRegulatorInterface, Ownable {
      *      transfers allowed).
      */
     bool partialTransfers;
+
+    /**
+    * @dev We set the maximum of minting allowance
+    */
+    uint256 mintAllowance;
 }
 
   // @dev Check success code
@@ -77,6 +82,9 @@ contract MetamorphTokenRegulator is MetamorphRegulatorInterface, Ownable {
   /// @dev Event raised when the admin priviledges changes
   event LogAdmin(address indexed admin, bool isAdmin);
 
+  /// @dev Mint Allowance
+  event MintAllowance(address indexed token, uint256 mintAllowance);
+
   constructor() public {
     admins[msg.sender] = true;
   }
@@ -92,6 +100,13 @@ contract MetamorphTokenRegulator is MetamorphRegulatorInterface, Ownable {
   function setUnlocked(address _token, bool _unlocked) public onlyAdmins {
     settings[_token].unlocked = _unlocked;
     emit LogLockSet(_token, _unlocked);
+  }
+
+  function setMintAllowance(address _token, uint256 _mintAllowance) public onlyAdmins {
+    uint256 totalSupply = R_ERC20Detailed(_token).totalSupply();
+    require(_mintAllowance > totalSupply, "minting allowance should be greater than the supply");
+    settings[_token].mintAllowance = _mintAllowance;
+    emit MintAllowance(_token, _mintAllowance);
   }
 
   /**
@@ -134,6 +149,17 @@ contract MetamorphTokenRegulator is MetamorphRegulatorInterface, Ownable {
   }
 
   /**
+   * @dev Allows the owner mint tokens depending of the allowance set.
+   *
+   * @param _token The address of the token to mint
+   * @param _amount The amount to mint
+   */
+  function checkMint(address _token, uint256 _amount) public view returns (bool) {
+    uint256 totalSupply = R_ERC20Detailed(_token).totalSupply();
+    return(totalSupply + _amount <= settings[_token].mintAllowance);
+  }
+
+  /**
    * @notice Checks whether or not a trade should be approved
    *
    * @dev    This method calls back to the token contract specified by `_token` for
@@ -160,8 +186,10 @@ contract MetamorphTokenRegulator is MetamorphRegulatorInterface, Ownable {
       return CHECK_ERECV;
     }
 
-    if (!settings[_token].partialTransfers && _amount % _wholeToken(_token) != 0) {
-      return CHECK_EDIVIS;
+    if (!settings[_token].partialTransfers) {
+      if(_amount % _wholeToken(_token) != 0){
+        return CHECK_EDIVIS;
+      }
     }
 
     return CHECK_SUCCESS;
@@ -182,12 +210,17 @@ contract MetamorphTokenRegulator is MetamorphRegulatorInterface, Ownable {
     return admins[_admin];
   }
 
-  function getStatus(address _token, address _from, address _to) public view returns (bool, bool, uint8, uint8) {
+  function getStatus(address _token, address _from, address _to) public view returns (bool, bool, uint8, uint8, uint256) {
     return(
       settings[_token].unlocked,
       settings[_token].partialTransfers,
       participants[_from],
-      participants[_to]
+      participants[_to],
+      settings[_token].mintAllowance
     );
+  }
+
+  function checkPartialTransfer(address _token, uint256 _amount) public view returns (uint256) {
+    return _amount % _wholeToken(_token);
   }
 }

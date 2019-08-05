@@ -45,12 +45,9 @@ contract MetamorphRegulatedToken is R_ERC20Detailed, ERC20Mintable {
    *
    * @return `true` if successful and `false` if unsuccessful
    */
-  function transfer(address _to, uint256 _value) public returns (bool) {
-    if (_check(msg.sender, _to, _value)) {
-      return super.transfer(_to, _value);
-    } else {
-      return false;
-    }
+  function transfer(address _to, uint256 _value) public returns(bool) {
+    require (_check(msg.sender, _to, _value), "Cannot transfer");
+    return super.transfer(_to, _value);
   }
 
   /**
@@ -63,11 +60,8 @@ contract MetamorphRegulatedToken is R_ERC20Detailed, ERC20Mintable {
    * @return `true` if successful and `false` if unsuccessful
    */
   function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
-    if (_check(_from, _to, _value)) {
+      require (_check(_from, _to, _value), "Cannot transferFrom");
       return super.transferFrom(_from, _to, _value);
-    } else {
-      return false;
-    }
   }
 
   /**
@@ -80,6 +74,7 @@ contract MetamorphRegulatedToken is R_ERC20Detailed, ERC20Mintable {
    */
   function mint(address _to, uint256 _value) public onlyOwner returns (bool) {
     require(_to == msg.sender, "Minting is only allowed in the owner's account");
+    require(_service().checkMint(address(this), _value), "Cannot mint that amount");
     _mint(msg.sender, _value);
     return true;
 }

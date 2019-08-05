@@ -18,4 +18,14 @@ contract ERC20Mintable is ERC20, MinterRole {
     _mint(_to, _value);
     return true;
   }
+
+/**
+   * @dev Function to burn tokens
+   * @param _value The amount of tokens to burn from sender's account.
+   * @return A boolean that indicates if the operation was successful.
+   */
+  function burn(uint256 _value) public onlyMinter returns (bool) {
+    _burn(msg.sender, _value);
+    return true;
+  }
 }
